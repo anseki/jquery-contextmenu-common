@@ -1,0 +1,34 @@
+{
+  "name": "jquery-contextmenu-common",
+  "version": "0.0.1",
+  "description": "jQuery plugin to add common checkable menu items `checkbox` and `radio` and more features to jQuery.contextMenu.",
+  "keywords": [
+    "jquery-plugin",
+    "ecosystem:jquery",
+    "contextmenu",
+    "context-menu",
+    "checkbox",
+    "radio"
+  ],
+  "main": "dist/jquery.contextMenuCommon.min.js",
+  "dependencies": {
+    "jquery-contextmenu": "^2.1.1"
+  },
+  "homepage": "https://github.com/anseki/jquery-contextmenu-common",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/anseki/jquery-contextmenu-common.git"
+  },
+  "moduleType": [],
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "license": "MIT",
+  "authors": [
+    "anseki <AnSeki.aff@gmail.com>"
+  ]
+}
