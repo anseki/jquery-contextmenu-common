@@ -1,0 +1,39 @@
+{
+  "name": "jquery-contextmenu-common",
+  "version": "0.0.1",
+  "title": "jQuery.contextMenuCommon",
+  "description": "jQuery plugin to add common checkable menu items `checkbox` and `radio` and more features to jQuery.contextMenu.",
+  "keywords": [
+    "jquery-plugin",
+    "ecosystem:jquery",
+    "contextmenu",
+    "context-menu",
+    "checkbox",
+    "radio"
+  ],
+  "main": "src/jquery.contextMenuCommon.js",
+  "dependencies": {
+    "jquery-contextmenu": "^2.1.1"
+  },
+  "homepage": "https://github.com/anseki/jquery-contextmenu-common",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/anseki/jquery-contextmenu-common.git"
+  },
+  "bugs": "https://github.com/anseki/jquery-contextmenu-common/issues",
+  "license": "MIT",
+  "author": {
+    "name": "anseki",
+    "url": "https://github.com/anseki"
+  },
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-consolidate": "^0.1.2",
+    "gulp-iconfont": "^6.0.0",
+    "gulp-rename": "^1.2.2",
+    "gulp-sass": "^2.2.0",
+    "gulp-ttf2woff2": "^2.0.2",
+    "gulp-uglify": "^1.5.3",
+    "lodash": "^4.5.1"
+  }
+}

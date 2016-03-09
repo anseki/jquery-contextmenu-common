@@ -1,0 +1,58 @@
+@import "variables";
+@import "icons/mixins";
+@import "icons";
+
+.context-menu-icon {
+  @extend %context-menu-icon;
+
+  &::before {
+    color: $context-menu-icon-color; // Custom $context-menu-icon-color
+  }
+
+  // https://github.com/swisnl/jQuery-contextMenu/pull/363
+  // Include lines that have $context-menu-text-color-disabled to make CSS override.
+
+  &.context-menu-disabled::before {
+    color: $context-menu-text-color-disabled;
+  }
+}
+
+.context-menu-item.context-menu-disabled {
+  color: $context-menu-text-color-disabled;
+  cursor: default;
+}
+
+.contextmenu-common-icon-ctrl::before {
+  font-family: $context-menu-icon-font-name;
+  color: $context-menu-icon-ctrl-color;
+}
+
+.context-menu-icon-fa::before {
+  font-family: FontAwesome;
+}
+
+%clearfix {
+  &::after {
+    content: "";
+    display: block;
+    clear: both;
+  }
+}
+
+.contextmenu-common-sublabel {
+  color: lighten($context-menu-text-color, 45);
+  float: right;
+  padding-left: 1em;
+
+  .context-menu-hover & {
+    color: darken($context-menu-text-color-hover, 10);
+  }
+
+  .context-menu-disabled & {
+    color: lighten($context-menu-text-color-disabled, 10);
+  }
+}
+
+.context-menu-item {
+  @extend %clearfix;
+}

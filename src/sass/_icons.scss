@@ -1,0 +1,13 @@
+
+.context-menu-icon-common-checkbox-off {
+  @include context-menu-item-icon(common-checkbox-off);
+}
+.context-menu-icon-common-checkbox-on {
+  @include context-menu-item-icon(common-checkbox-on);
+}
+.context-menu-icon-common-radio-off {
+  @include context-menu-item-icon(common-radio-off);
+}
+.context-menu-icon-common-radio-on {
+  @include context-menu-item-icon(common-radio-on);
+}

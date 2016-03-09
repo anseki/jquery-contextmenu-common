@@ -1,0 +1,14 @@
+// Item Default
+$context-menu-text-color: #2f2f2f !default;
+
+// Item Hover
+$context-menu-text-color-hover: #fff !default;
+
+// Item Disabled
+$context-menu-text-color-disabled: lighten($context-menu-text-color, 55) !default;
+
+// Icons
+$context-menu-icon-font-path: "font/" !default;
+$context-menu-icon-font-name: "context-menu-common-icons" !default;
+$context-menu-icon-color: #868594;
+$context-menu-icon-ctrl-color: $context-menu-text-color;
