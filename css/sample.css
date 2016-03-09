@@ -1,0 +1,30 @@
+.trigger {
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
+  border-radius: 3px;
+  display: inline-block;
+  min-width: 12em;
+  box-sizing: border-box;
+  margin: 3px;
+  padding: 0.3em;
+  color: #fff;
+  background-color: #24ab9e;
+  text-align: center;
+  line-height: normal;
+  cursor: default;
+}
+
+.context-menu-list {
+  font-family: Verdana, Helvetica, Arial, sans-serif;
+  font-size: 16px;
+  line-height: normal;
+}
+
+.console {
+  width: 340px;
+  height: 120px;
+  margin: 3px;
+  background-color: #e6e6e6;
+  font-size: 14px;
+  font-family: "Source Code Pro", monospace;
+}

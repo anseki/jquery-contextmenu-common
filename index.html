@@ -1,0 +1,1062 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="description" content="jQuery plugin to add common checkable menu items `checkbox` and `radio` and more features to jQuery.contextMenu.">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="css/normalize.css">
+  <link rel="stylesheet" href="css/syntax.css">
+  <link rel="stylesheet" href="css/default.css">
+  <link href="css/jquery.contextMenu.min.css" rel="stylesheet">
+  <link href="css/jquery.contextMenuCommon.min.css" rel="stylesheet">
+  <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet">
+  <link href="css/sample.css" rel="stylesheet">
+  <!-- Libs for sample codes must be loaded in "head". -->
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+  <script src="js/jquery.ui.position.min.js"></script>
+  <script src="js/jquery.contextMenu.min.js"></script>
+  <script src="js/jquery.contextMenuCommon.min.js"></script>
+  <script src="js/sample.js"></script>
+
+  <title>jQuery.contextMenuCommon</title>
+</head>
+<body>
+  <header>
+    <h1><a href="./">jQuery<br>.contextMenuCommon</a></h1>
+    <ul id="gh"><li><a href="https://github.com/anseki/jquery-contextmenu-common/tarball/master">Download TAR.GZ</a></li><li><a href="https://github.com/anseki/jquery-contextmenu-common/zipball/master">Download ZIP</a></li><li><a href="https://github.com/anseki/jquery-contextmenu-common">View on GitHub</a></li></ul>
+  </header>
+  <main>
+
+<p>jQuery plugin to add common checkable menu items <code>checkbox</code> and <code>radio</code> and more features to jQuery.contextMenu.</p>
+
+<p><img src="img/s01.png" alt="screen"></p>
+
+<p>A very useful jQuery plugin <a href="https://swisnl.github.io/jQuery-contextMenu/">jQuery.contextMenu</a> supports <code>text</code>, <code>textarea</code>, <code>checkbox</code>, <code>radio</code>, etc., as <code>item.type</code>. Those allow you to embed form elements in the menu.<br>Those may be useful in special cases, aside from whether users welcome a form that appears via right-click or not.<br>But two types <code>checkbox</code> and <code>radio</code> are very popular UI many apps need, and behavior of those differs from that of common menu UI many apps have because those are embedded form elements. For example, those get a focus and tab-stop, a user can&#39;t make the focus move through to other menu items by pressing arrow keys. And also, those don&#39;t keep own state by itself, the states are cleared when the menu is reopened.</p>
+
+<p>This jQuery.contextMenuCommon plugin wraps jQuery.contextMenu, and adds <code>checkbox</code> and <code>radio</code> menu types that work like common menu UI users usually use. Also, it supports sub-labels such as shortcut-keys, dynamic changing, and so on.</p>
+
+<ul>
+<li><code>checkbox</code> and <code>radio</code> menu types like common menu UI are supported.</li>
+<li><a href="https://fortawesome.github.io/Font-Awesome/">Font Awesome</a> icons are supported.</li>
+<li>Disabled menu items are grayed-out like common menu UI. Included icons and mouse cursor are also controlled.</li>
+<li>Sub-label like displaying shortcut-keys by common menu UI is supported.</li>
+</ul>
+
+<h2 id="usage">Usage</h2>
+
+<p>Load jQuery.contextMenuCommon (2 files <code>css</code> and <code>js</code>) after jQuery.contextMenu.</p>
+<div class="highlight"><pre><code class="language-html" data-lang="html"><span class="nt">&lt;link</span> <span class="na">href=</span><span class="s">&quot;jquery.contextMenu.min.css&quot;</span> <span class="na">rel=</span><span class="s">&quot;stylesheet&quot;</span><span class="nt">/&gt;</span>
+<span class="nt">&lt;link</span> <span class="na">href=</span><span class="s">&quot;jquery.contextMenuCommon.min.css&quot;</span> <span class="na">rel=</span><span class="s">&quot;stylesheet&quot;</span><span class="nt">/&gt;</span>
+
+<span class="nt">&lt;script </span><span class="na">src=</span><span class="s">&quot;jquery.min.js&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
+<span class="nt">&lt;script </span><span class="na">src=</span><span class="s">&quot;jquery.ui.position.min.js&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
+<span class="nt">&lt;script </span><span class="na">src=</span><span class="s">&quot;jquery.contextMenu.mi.js&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
+<span class="nt">&lt;script </span><span class="na">src=</span><span class="s">&quot;jquery.contextMenuCommon.min.js&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
+</code></pre></div>
+<p>Since jQuery.contextMenuCommon wraps jQuery.contextMenu, it works as jQuery.contextMenu completely, except additional features. See <a href="https://swisnl.github.io/jQuery-contextMenu/docs.html">jQuery.contextMenu Documentation</a> for basic usage.</p>
+
+<p>Each item object that is included in <code>items</code> in constructor options accepts <a href="#checkbox-type"><code>&#39;checkbox&#39;</code></a> and <a href="#radio-type"><code>&#39;radio&#39;</code></a> as value of <code>type</code> property.<br>For example:</p>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">$</span><span class="p">.</span><span class="nx">contextMenuCommon</span><span class="p">({</span>
+  <span class="nx">selector</span><span class="o">:</span> <span class="s1">&#39;#trigger&#39;</span><span class="p">,</span>
+  <span class="nx">items</span><span class="o">:</span> <span class="p">{</span>
+
+    <span class="nx">fontBold</span><span class="o">:</span> <span class="p">{</span>
+      <span class="nx">label</span><span class="o">:</span> <span class="s1">&#39;Bold Font&#39;</span><span class="p">,</span>
+      <span class="nx">type</span><span class="o">:</span> <span class="s1">&#39;checkbox&#39;</span>
+    <span class="p">},</span>
+
+    <span class="nx">fontSize</span><span class="o">:</span> <span class="p">{</span>
+      <span class="nx">label</span><span class="o">:</span> <span class="s1">&#39;Font Size&#39;</span><span class="p">,</span>
+      <span class="nx">items</span><span class="o">:</span> <span class="p">{</span>
+        <span class="nx">size1</span><span class="o">:</span> <span class="p">{</span>
+          <span class="nx">label</span><span class="o">:</span> <span class="s1">&#39;Small&#39;</span><span class="p">,</span>
+          <span class="nx">type</span><span class="o">:</span> <span class="s1">&#39;radio&#39;</span>
+        <span class="p">},</span>
+        <span class="nx">size2</span><span class="o">:</span> <span class="p">{</span>
+          <span class="nx">label</span><span class="o">:</span> <span class="s1">&#39;Medium&#39;</span><span class="p">,</span>
+          <span class="nx">type</span><span class="o">:</span> <span class="s1">&#39;radio&#39;</span>
+        <span class="p">},</span>
+        <span class="nx">size3</span><span class="o">:</span> <span class="p">{</span>
+          <span class="nx">label</span><span class="o">:</span> <span class="s1">&#39;Large&#39;</span><span class="p">,</span>
+          <span class="nx">type</span><span class="o">:</span> <span class="s1">&#39;radio&#39;</span>
+        <span class="p">}</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+
+  <span class="p">}</span>
+<span class="p">});</span>
+</code></pre></div>
+<!-- include "sample_01.html" -->
+<!-- ================ sample -->
+<p><span class="trigger" id="sample-01-trigger">Right-Click Here</span></p>
+
+<script>
+$(function() {
+  'use strict';
+
+  $.contextMenuCommon({
+    selector: '#sample-01-trigger',
+    items: {
+
+      fontBold: {
+        label: 'Bold Font',
+        type: 'checkbox'
+      },
+
+      fontSize: {
+        label: 'Font Size',
+        items: {
+          size1: {
+            label: 'Small',
+            type: 'radio'
+          },
+          size2: {
+            label: 'Medium',
+            type: 'radio'
+          },
+          size3: {
+            label: 'Large',
+            type: 'radio'
+          }
+        }
+      }
+
+    }
+  });
+
+});
+</script>
+<!-- ================ /sample -->
+<!-- /include "sample_01.html" -->
+
+<p>You can specify a <code>value</code> property of each menu item, that value is got when the menu item is in the specified state.<br>There are two way to get a current value (or state).</p>
+
+<ul>
+<li>A value of <code>checked</code> property of each menu item is updated synchronously with the state that is changed by user or your app.</li>
+<li><a href="#methods_value"><code>value</code></a> method returns a current value.</li>
+</ul>
+
+<p>For example:</p>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">items</span> <span class="o">=</span> <span class="p">{</span>
+
+  <span class="nx">fontWeight</span><span class="o">:</span> <span class="p">{</span>
+    <span class="nx">label</span><span class="o">:</span> <span class="s1">&#39;Bold Font&#39;</span><span class="p">,</span>
+    <span class="nx">type</span><span class="o">:</span> <span class="s1">&#39;checkbox&#39;</span><span class="p">,</span>
+    <span class="nx">value</span><span class="o">:</span> <span class="p">[</span><span class="s1">&#39;normal&#39;</span><span class="p">,</span> <span class="s1">&#39;bold&#39;</span><span class="p">]</span>
+    <span class="c1">// For user: &quot;Do you want Bold Font?&quot; -&gt; &quot;Yes&quot; or &quot;No&quot;</span>
+    <span class="c1">// For your app: Current value of `fontWeight` -&gt; &#39;bold&#39; or &#39;normal&#39;</span>
+  <span class="p">},</span>
+
+  <span class="nx">fontSize</span><span class="o">:</span> <span class="p">{</span>
+    <span class="nx">label</span><span class="o">:</span> <span class="s1">&#39;Font Size&#39;</span><span class="p">,</span>
+    <span class="nx">items</span><span class="o">:</span> <span class="p">{</span>
+      <span class="nx">size1</span><span class="o">:</span> <span class="p">{</span>
+        <span class="nx">label</span><span class="o">:</span> <span class="s1">&#39;Small&#39;</span><span class="p">,</span>
+        <span class="nx">type</span><span class="o">:</span> <span class="s1">&#39;radio&#39;</span><span class="p">,</span>
+        <span class="nx">radiogroup</span><span class="o">:</span> <span class="s1">&#39;fontSize&#39;</span><span class="p">,</span>
+        <span class="nx">value</span><span class="o">:</span> <span class="s1">&#39;8pt&#39;</span>
+      <span class="p">},</span>
+      <span class="nx">size2</span><span class="o">:</span> <span class="p">{</span>
+        <span class="nx">label</span><span class="o">:</span> <span class="s1">&#39;Medium&#39;</span><span class="p">,</span>
+        <span class="nx">type</span><span class="o">:</span> <span class="s1">&#39;radio&#39;</span><span class="p">,</span>
+        <span class="nx">radiogroup</span><span class="o">:</span> <span class="s1">&#39;fontSize&#39;</span><span class="p">,</span>
+        <span class="nx">value</span><span class="o">:</span> <span class="s1">&#39;12pt&#39;</span><span class="p">,</span>
+        <span class="nx">checked</span><span class="o">:</span> <span class="kc">true</span>
+      <span class="p">},</span>
+      <span class="nx">size3</span><span class="o">:</span> <span class="p">{</span>
+        <span class="nx">label</span><span class="o">:</span> <span class="s1">&#39;Large&#39;</span><span class="p">,</span>
+        <span class="nx">type</span><span class="o">:</span> <span class="s1">&#39;radio&#39;</span><span class="p">,</span>
+        <span class="nx">radiogroup</span><span class="o">:</span> <span class="s1">&#39;fontSize&#39;</span><span class="p">,</span>
+        <span class="nx">value</span><span class="o">:</span> <span class="s1">&#39;16pt&#39;</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="c1">// For user: &quot;Please choose Font Size&quot; -&gt; &quot;Small&quot;, &quot;Medium&quot; or &quot;Large&quot;</span>
+    <span class="c1">// For your app: Current value of `fontSize` -&gt; &#39;8pt&#39;, &#39;12pt&#39; or &#39;16pt&#39;</span>
+  <span class="p">}</span>
+
+<span class="p">};</span>
+
+<span class="nx">$</span><span class="p">.</span><span class="nx">contextMenuCommon</span><span class="p">({</span><span class="nx">selector</span><span class="o">:</span> <span class="s1">&#39;#trigger&#39;</span><span class="p">,</span> <span class="nx">items</span><span class="o">:</span> <span class="nx">items</span><span class="p">});</span>
+
+<span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#button&#39;</span><span class="p">).</span><span class="nx">click</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;================ Get `checked`&#39;</span><span class="p">);</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;fontWeight: &#39;</span> <span class="o">+</span> <span class="nx">items</span><span class="p">.</span><span class="nx">fontWeight</span><span class="p">.</span><span class="nx">checked</span><span class="p">);</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;fontSize size1: &#39;</span> <span class="o">+</span> <span class="nx">items</span><span class="p">.</span><span class="nx">fontSize</span><span class="p">.</span><span class="nx">items</span><span class="p">.</span><span class="nx">size1</span><span class="p">.</span><span class="nx">checked</span><span class="p">);</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;fontSize size2: &#39;</span> <span class="o">+</span> <span class="nx">items</span><span class="p">.</span><span class="nx">fontSize</span><span class="p">.</span><span class="nx">items</span><span class="p">.</span><span class="nx">size2</span><span class="p">.</span><span class="nx">checked</span><span class="p">);</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;fontSize size3: &#39;</span> <span class="o">+</span> <span class="nx">items</span><span class="p">.</span><span class="nx">fontSize</span><span class="p">.</span><span class="nx">items</span><span class="p">.</span><span class="nx">size3</span><span class="p">.</span><span class="nx">checked</span><span class="p">);</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;================ Get value&#39;</span><span class="p">);</span>
+  <span class="kd">var</span> <span class="nx">$trigger</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#trigger&#39;</span><span class="p">);</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;fontWeight: &#39;</span> <span class="o">+</span> <span class="nx">$trigger</span><span class="p">.</span><span class="nx">contextMenuCommon</span><span class="p">(</span><span class="s1">&#39;value&#39;</span><span class="p">,</span> <span class="s1">&#39;fontWeight&#39;</span><span class="p">));</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;fontSize: &#39;</span> <span class="o">+</span> <span class="nx">$trigger</span><span class="p">.</span><span class="nx">contextMenuCommon</span><span class="p">(</span><span class="s1">&#39;value&#39;</span><span class="p">,</span> <span class="s1">&#39;fontSize&#39;</span><span class="p">));</span>
+<span class="p">});</span>
+</code></pre></div>
+<!-- include "sample_02.html" -->
+<!-- ================ sample -->
+<div class="cols2">
+  <div class="col" style="text-align: right; padding-top: 10px;">
+    <span class="trigger" id="sample-02-trigger">Right-click here</span><br>    <button id="sample-02-button">Get value</button>
+  </div>
+  <div class="col">
+    <textarea readonly class="console" id="sample-02-console"></textarea>
+  </div>
+</div>
+
+<script>
+$(function() {
+  'use strict';
+
+  var console = getVConsole('#sample-02-console');
+
+  var items = {
+
+    fontWeight: {
+      label: 'Bold Font',
+      type: 'checkbox',
+      value: ['normal', 'bold']
+      // For user: "Do you want Bold Font?" -> "Yes" or "No"
+      // For your app: Current value of `fontWeight` -> 'bold' or 'normal'
+    },
+
+    fontSize: {
+      label: 'Font Size',
+      items: {
+        size1: {
+          label: 'Small',
+          type: 'radio',
+          radiogroup: 'fontSize',
+          value: '8pt'
+        },
+        size2: {
+          label: 'Medium',
+          type: 'radio',
+          radiogroup: 'fontSize',
+          value: '12pt',
+          checked: true
+        },
+        size3: {
+          label: 'Large',
+          type: 'radio',
+          radiogroup: 'fontSize',
+          value: '16pt'
+        }
+      }
+      // For user: "Please choose Font Size" -> "Small", "Medium" or "Large"
+      // For your app: Current value of `fontSize` -> '8pt', '12pt' or '16pt'
+    }
+
+  };
+
+  $.contextMenuCommon({selector: '#sample-02-trigger', items: items});
+
+  $('#sample-02-button').click(function() {
+    console.log('================ Get `checked`');
+    console.log('fontWeight: ' + items.fontWeight.checked);
+    console.log('fontSize size1: ' + items.fontSize.items.size1.checked);
+    console.log('fontSize size2: ' + items.fontSize.items.size2.checked);
+    console.log('fontSize size3: ' + items.fontSize.items.size3.checked);
+    console.log('================ Get value');
+    var $trigger = $('#sample-02-trigger');
+    console.log('fontWeight: ' + $trigger.contextMenuCommon('value', 'fontWeight'));
+    console.log('fontSize: ' + $trigger.contextMenuCommon('value', 'fontSize'));
+  });
+
+});
+</script>
+<!-- ================ /sample -->
+<!-- /include "sample_02.html" -->
+
+<h2 id="checkbox-type"><code>checkbox</code> type</h2>
+
+<p>A menu item that <code>&#39;checkbox&#39;</code> is specified to <code>type</code> property works as <code>checkbox</code> menu item.<br>For example:</p>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="c1">// In constructor options</span>
+<span class="nx">items</span><span class="o">:</span> <span class="p">{</span>
+
+  <span class="nx">fontBold</span><span class="o">:</span> <span class="p">{</span>
+    <span class="nx">label</span><span class="o">:</span> <span class="s1">&#39;Bold Font&#39;</span><span class="p">,</span>
+    <span class="nx">type</span><span class="o">:</span> <span class="s1">&#39;checkbox&#39;</span>
+  <span class="p">}</span>
+
+<span class="p">}</span>
+</code></pre></div>
+<p>The <code>checkbox</code> menu item accepts following properties:<br>(All properties are optional)</p>
+
+<h3 id="checked"><code>checked</code></h3>
+
+<p><em>Alias:</em> <code>selected</code><br><em>Type:</em> boolean<br><em>Default:</em> <code>false</code></p>
+
+<p>An initial or current state to indicate whether the checkbox of this menu item is checked or not.<br>This is updated synchronously with the state that is changed by user or your app.</p>
+
+<p>For example:</p>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="c1">// In constructor options</span>
+<span class="nx">items</span><span class="o">:</span> <span class="p">{</span>
+  <span class="nx">item</span><span class="o">:</span> <span class="p">{</span>
+    <span class="nx">label</span><span class="o">:</span> <span class="s1">&#39;Item&#39;</span><span class="p">,</span>
+    <span class="nx">type</span><span class="o">:</span> <span class="s1">&#39;checkbox&#39;</span><span class="p">,</span>
+    <span class="nx">checked</span><span class="o">:</span> <span class="kc">true</span> <span class="c1">// This checkbox is checked when constructed</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<h3 id="value"><code>value</code></h3>
+
+<p><em>Type:</em> Array or any<br><em>Default:</em> <code>[false, true]</code></p>
+
+<p>If something other than an array is specified, it is considered as <code>[false, &lt;something&gt;]</code>.<br>When the checkbox of this menu item is checked, <a href="#methods_value"><code>value</code></a> method returns <code>value[1]</code> as a current value, otherwise <code>value[0]</code>.</p>
+
+<p>For example:</p>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="c1">// In constructor options</span>
+<span class="nx">items</span><span class="o">:</span> <span class="p">{</span>
+  <span class="nx">appendTo</span><span class="o">:</span> <span class="p">{</span>
+    <span class="nx">label</span><span class="o">:</span> <span class="s1">&#39;Add to document&#39;</span><span class="p">,</span>
+    <span class="nx">type</span><span class="o">:</span> <span class="s1">&#39;checkbox&#39;</span><span class="p">,</span>
+    <span class="nx">value</span><span class="o">:</span> <span class="p">[</span><span class="nx">$header</span><span class="p">,</span> <span class="nb">document</span><span class="p">]</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+<span class="c1">// When user checked &#39;Add to Document&#39;, `appendTo` value is `document`.</span>
+<span class="c1">// When user did not check it, `appendTo` value is `$header`.</span>
+</code></pre></div>
+<p>For example, set reversed booleans, that is, get <code>true</code> when the checkbox is not checked, and get <code>false</code> when it is checked:</p>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="c1">// In constructor options</span>
+<span class="nx">items</span><span class="o">:</span> <span class="p">{</span>
+  <span class="nx">overwrite</span><span class="o">:</span> <span class="p">{</span> <span class="c1">// This `overwrite` is meaningful name.</span>
+    <span class="nx">label</span><span class="o">:</span> <span class="s1">&#39;Confirm existing file&#39;</span><span class="p">,</span>
+    <span class="nx">type</span><span class="o">:</span> <span class="s1">&#39;checkbox&#39;</span><span class="p">,</span>
+    <span class="nx">value</span><span class="o">:</span> <span class="p">[</span><span class="kc">true</span><span class="p">,</span> <span class="kc">false</span><span class="p">]</span> <span class="c1">// reversed</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<h2 id="radio-type"><code>radio</code> type</h2>
+
+<p>A menu item that <code>&#39;radio&#39;</code> is specified to <code>type</code> property works as <code>radio</code> menu item.<br>For example:</p>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="c1">// In constructor options</span>
+<span class="nx">items</span><span class="o">:</span> <span class="p">{</span>
+
+  <span class="nx">small</span><span class="o">:</span> <span class="p">{</span>
+    <span class="nx">label</span><span class="o">:</span> <span class="s1">&#39;Small&#39;</span><span class="p">,</span>
+    <span class="nx">type</span><span class="o">:</span> <span class="s1">&#39;radio&#39;</span>
+  <span class="p">},</span>
+
+  <span class="nx">large</span><span class="o">:</span> <span class="p">{</span>
+    <span class="nx">label</span><span class="o">:</span> <span class="s1">&#39;Large&#39;</span><span class="p">,</span>
+    <span class="nx">type</span><span class="o">:</span> <span class="s1">&#39;radio&#39;</span>
+  <span class="p">}</span>
+
+<span class="p">}</span>
+</code></pre></div>
+<p>The <code>radio</code> menu item accepts following properties:<br>(All properties are optional)</p>
+
+<h3 id="radiogroup"><code>radiogroup</code></h3>
+
+<p><em>Alias:</em> <code>radio</code><br><em>Type:</em> string<br><em>Default:</em> <code>undefined</code></p>
+
+<p>A string to group the menu items and identify the group.<br>Items <code>radiogroup</code> is not specified in a same menu node (i.e. one <code>items</code> object) are grouped into one group.<br>For example, there are five groups:</p>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="c1">// In constructor options</span>
+<span class="nx">items</span><span class="o">:</span> <span class="p">{</span>
+  <span class="nx">a1</span><span class="o">:</span> <span class="p">{</span>
+    <span class="nx">label</span><span class="o">:</span> <span class="s1">&#39;Group A (1)&#39;</span><span class="p">,</span>
+    <span class="nx">type</span><span class="o">:</span> <span class="s1">&#39;radio&#39;</span>
+  <span class="p">},</span>
+  <span class="nx">a2</span><span class="o">:</span> <span class="p">{</span>
+    <span class="nx">label</span><span class="o">:</span> <span class="s1">&#39;Group A (2)&#39;</span><span class="p">,</span>
+    <span class="nx">type</span><span class="o">:</span> <span class="s1">&#39;radio&#39;</span>
+  <span class="p">},</span>
+  <span class="nx">a3</span><span class="o">:</span> <span class="p">{</span>
+    <span class="nx">label</span><span class="o">:</span> <span class="s1">&#39;Group A (3)&#39;</span><span class="p">,</span>
+    <span class="nx">type</span><span class="o">:</span> <span class="s1">&#39;radio&#39;</span>
+  <span class="p">},</span>
+
+  <span class="nx">sep1</span><span class="o">:</span> <span class="p">{</span> <span class="nx">type</span><span class="o">:</span> <span class="s1">&#39;cm_seperator&#39;</span> <span class="p">},</span>
+
+  <span class="nx">b1</span><span class="o">:</span> <span class="p">{</span>
+    <span class="nx">label</span><span class="o">:</span> <span class="s1">&#39;Group B (1)&#39;</span><span class="p">,</span>
+    <span class="nx">type</span><span class="o">:</span> <span class="s1">&#39;radio&#39;</span><span class="p">,</span>
+    <span class="nx">radiogroup</span><span class="o">:</span> <span class="s1">&#39;groupB&#39;</span>
+  <span class="p">},</span>
+  <span class="nx">b2</span><span class="o">:</span> <span class="p">{</span>
+    <span class="nx">label</span><span class="o">:</span> <span class="s1">&#39;Group B (2)&#39;</span><span class="p">,</span>
+    <span class="nx">type</span><span class="o">:</span> <span class="s1">&#39;radio&#39;</span><span class="p">,</span>
+    <span class="nx">radiogroup</span><span class="o">:</span> <span class="s1">&#39;groupB&#39;</span>
+  <span class="p">},</span>
+  <span class="nx">b3</span><span class="o">:</span> <span class="p">{</span>
+    <span class="nx">label</span><span class="o">:</span> <span class="s1">&#39;Group B (3)&#39;</span><span class="p">,</span>
+    <span class="nx">type</span><span class="o">:</span> <span class="s1">&#39;radio&#39;</span><span class="p">,</span>
+    <span class="nx">radiogroup</span><span class="o">:</span> <span class="s1">&#39;groupB&#39;</span>
+  <span class="p">},</span>
+
+  <span class="nx">sep2</span><span class="o">:</span> <span class="p">{</span> <span class="nx">type</span><span class="o">:</span> <span class="s1">&#39;cm_seperator&#39;</span> <span class="p">},</span>
+
+  <span class="nx">c</span><span class="o">:</span> <span class="p">{</span>
+    <span class="nx">label</span><span class="o">:</span> <span class="s1">&#39;Group C&#39;</span><span class="p">,</span>
+    <span class="nx">items</span><span class="o">:</span> <span class="p">{</span>
+      <span class="nx">c1</span><span class="o">:</span> <span class="p">{</span>
+        <span class="nx">label</span><span class="o">:</span> <span class="s1">&#39;(1)&#39;</span><span class="p">,</span>
+        <span class="nx">type</span><span class="o">:</span> <span class="s1">&#39;radio&#39;</span>
+      <span class="p">},</span>
+      <span class="nx">c2</span><span class="o">:</span> <span class="p">{</span>
+        <span class="nx">label</span><span class="o">:</span> <span class="s1">&#39;(2)&#39;</span><span class="p">,</span>
+        <span class="nx">type</span><span class="o">:</span> <span class="s1">&#39;radio&#39;</span>
+      <span class="p">},</span>
+      <span class="nx">c3</span><span class="o">:</span> <span class="p">{</span>
+        <span class="nx">label</span><span class="o">:</span> <span class="s1">&#39;(3)&#39;</span><span class="p">,</span>
+        <span class="nx">type</span><span class="o">:</span> <span class="s1">&#39;radio&#39;</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+  <span class="p">},</span>
+
+  <span class="nx">sep3</span><span class="o">:</span> <span class="p">{</span> <span class="nx">type</span><span class="o">:</span> <span class="s1">&#39;cm_seperator&#39;</span> <span class="p">},</span>
+
+  <span class="nx">de</span><span class="o">:</span> <span class="p">{</span>
+    <span class="nx">label</span><span class="o">:</span> <span class="s1">&#39;Group D and E&#39;</span><span class="p">,</span>
+    <span class="nx">items</span><span class="o">:</span> <span class="p">{</span>
+      <span class="nx">d1</span><span class="o">:</span> <span class="p">{</span>
+        <span class="nx">label</span><span class="o">:</span> <span class="s1">&#39;Group D (1)&#39;</span><span class="p">,</span>
+        <span class="nx">type</span><span class="o">:</span> <span class="s1">&#39;radio&#39;</span>
+      <span class="p">},</span>
+      <span class="nx">d2</span><span class="o">:</span> <span class="p">{</span>
+        <span class="nx">label</span><span class="o">:</span> <span class="s1">&#39;Group D (2)&#39;</span><span class="p">,</span>
+        <span class="nx">type</span><span class="o">:</span> <span class="s1">&#39;radio&#39;</span>
+      <span class="p">},</span>
+      <span class="nx">d3</span><span class="o">:</span> <span class="p">{</span>
+        <span class="nx">label</span><span class="o">:</span> <span class="s1">&#39;Group D (3)&#39;</span><span class="p">,</span>
+        <span class="nx">type</span><span class="o">:</span> <span class="s1">&#39;radio&#39;</span>
+      <span class="p">},</span>
+
+      <span class="nx">sep4</span><span class="o">:</span> <span class="p">{</span> <span class="nx">type</span><span class="o">:</span> <span class="s1">&#39;cm_seperator&#39;</span> <span class="p">},</span>
+
+      <span class="nx">e1</span><span class="o">:</span> <span class="p">{</span>
+        <span class="nx">label</span><span class="o">:</span> <span class="s1">&#39;Group E (1)&#39;</span><span class="p">,</span>
+        <span class="nx">type</span><span class="o">:</span> <span class="s1">&#39;radio&#39;</span><span class="p">,</span>
+        <span class="nx">radiogroup</span><span class="o">:</span> <span class="s1">&#39;groupE&#39;</span>
+      <span class="p">},</span>
+      <span class="nx">e2</span><span class="o">:</span> <span class="p">{</span>
+        <span class="nx">label</span><span class="o">:</span> <span class="s1">&#39;Group E (2)&#39;</span><span class="p">,</span>
+        <span class="nx">type</span><span class="o">:</span> <span class="s1">&#39;radio&#39;</span><span class="p">,</span>
+        <span class="nx">radiogroup</span><span class="o">:</span> <span class="s1">&#39;groupE&#39;</span>
+      <span class="p">},</span>
+      <span class="nx">e3</span><span class="o">:</span> <span class="p">{</span>
+        <span class="nx">label</span><span class="o">:</span> <span class="s1">&#39;Group E (3)&#39;</span><span class="p">,</span>
+        <span class="nx">type</span><span class="o">:</span> <span class="s1">&#39;radio&#39;</span><span class="p">,</span>
+        <span class="nx">radiogroup</span><span class="o">:</span> <span class="s1">&#39;groupE&#39;</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<!-- include "sample_03.html" -->
+<!-- ================ sample -->
+<p><span class="trigger" id="sample-03-trigger">Right-Click Here</span></p>
+
+<script>
+$(function() {
+  'use strict';
+
+  $.contextMenuCommon({
+    selector: '#sample-03-trigger',
+    items: {
+      a1: {
+        label: 'Group A (1)',
+        type: 'radio'
+      },
+      a2: {
+        label: 'Group A (2)',
+        type: 'radio'
+      },
+      a3: {
+        label: 'Group A (3)',
+        type: 'radio'
+      },
+
+      sep1: { type: 'cm_seperator' },
+
+      b1: {
+        label: 'Group B (1)',
+        type: 'radio',
+        radiogroup: 'groupB'
+      },
+      b2: {
+        label: 'Group B (2)',
+        type: 'radio',
+        radiogroup: 'groupB'
+      },
+      b3: {
+        label: 'Group B (3)',
+        type: 'radio',
+        radiogroup: 'groupB'
+      },
+
+      sep2: { type: 'cm_seperator' },
+
+      c: {
+        label: 'Group C',
+        items: {
+          c1: {
+            label: '(1)',
+            type: 'radio'
+          },
+          c2: {
+            label: '(2)',
+            type: 'radio'
+          },
+          c3: {
+            label: '(3)',
+            type: 'radio'
+          }
+        }
+      },
+
+      sep3: { type: 'cm_seperator' },
+
+      de: {
+        label: 'Group D and E',
+        items: {
+          d1: {
+            label: 'Group D (1)',
+            type: 'radio'
+          },
+          d2: {
+            label: 'Group D (2)',
+            type: 'radio'
+          },
+          d3: {
+            label: 'Group D (3)',
+            type: 'radio'
+          },
+
+          sep4: { type: 'cm_seperator' },
+
+          e1: {
+            label: 'Group E (1)',
+            type: 'radio',
+            radiogroup: 'groupE'
+          },
+          e2: {
+            label: 'Group E (2)',
+            type: 'radio',
+            radiogroup: 'groupE'
+          },
+          e3: {
+            label: 'Group E (3)',
+            type: 'radio',
+            radiogroup: 'groupE'
+          }
+        }
+      }
+    }
+  });
+
+});
+</script>
+<!-- ================ /sample -->
+<!-- /include "sample_03.html" -->
+
+<h3 id="checked"><code>checked</code></h3>
+
+<p><em>Alias:</em> <code>selected</code><br><em>Type:</em> boolean<br><em>Default:</em> first item in a group is <code>true</code>, others are <code>false</code></p>
+
+<p>An initial or current state to indicate whether the radio of this menu item is checked or not.<br>This is updated synchronously with the state that is changed by user or your app.<br>Only a last menu item <code>true</code> is specified in a group is checked. By default, a first menu item in a group is checked.</p>
+
+<p>For example:</p>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="c1">// In constructor options</span>
+<span class="nx">items</span><span class="o">:</span> <span class="p">{</span>
+  <span class="nx">item1</span><span class="o">:</span> <span class="p">{</span>
+    <span class="nx">label</span><span class="o">:</span> <span class="s1">&#39;Item 1&#39;</span><span class="p">,</span>
+    <span class="nx">type</span><span class="o">:</span> <span class="s1">&#39;radio&#39;</span>
+  <span class="p">},</span>
+  <span class="nx">item2</span><span class="o">:</span> <span class="p">{</span>
+    <span class="nx">label</span><span class="o">:</span> <span class="s1">&#39;Item 2&#39;</span><span class="p">,</span>
+    <span class="nx">type</span><span class="o">:</span> <span class="s1">&#39;radio&#39;</span><span class="p">,</span>
+    <span class="nx">checked</span><span class="o">:</span> <span class="kc">true</span> <span class="c1">// This radio is checked when constructed</span>
+  <span class="p">},</span>
+  <span class="nx">item3</span><span class="o">:</span> <span class="p">{</span>
+    <span class="nx">label</span><span class="o">:</span> <span class="s1">&#39;Item 3&#39;</span><span class="p">,</span>
+    <span class="nx">type</span><span class="o">:</span> <span class="s1">&#39;radio&#39;</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<h3 id="value"><code>value</code></h3>
+
+<p><em>Type:</em> any<br><em>Default:</em> zero-based index number in a group</p>
+
+<p>When the radio of this menu item is checked, <a href="#methods_value"><code>value</code></a> method returns <code>value</code> as a current value of a group that includes this menu item.<br>In other words, a current value of a group is a <code>value</code> of checked menu item in the group.</p>
+
+<p>For example:</p>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="c1">// In constructor options</span>
+<span class="nx">items</span><span class="o">:</span> <span class="p">{</span>
+  <span class="nx">a</span><span class="o">:</span> <span class="p">{</span>
+    <span class="nx">label</span><span class="o">:</span> <span class="s1">&#39;Item A&#39;</span><span class="p">,</span>
+    <span class="nx">type</span><span class="o">:</span> <span class="s1">&#39;radio&#39;</span><span class="p">,</span>
+    <span class="nx">value</span><span class="o">:</span> <span class="s1">&#39;A&#39;</span> <span class="c1">// &#39;A&#39; is returned when this item is checked.</span>
+  <span class="p">},</span>
+  <span class="nx">b</span><span class="o">:</span> <span class="p">{</span>
+    <span class="nx">label</span><span class="o">:</span> <span class="s1">&#39;Item B&#39;</span><span class="p">,</span>
+    <span class="nx">type</span><span class="o">:</span> <span class="s1">&#39;radio&#39;</span> <span class="c1">// `1` (index) is returned when this item is checked.</span>
+  <span class="p">},</span>
+  <span class="nx">c</span><span class="o">:</span> <span class="p">{</span>
+    <span class="nx">label</span><span class="o">:</span> <span class="s1">&#39;Item C&#39;</span><span class="p">,</span>
+    <span class="nx">type</span><span class="o">:</span> <span class="s1">&#39;radio&#39;</span><span class="p">,</span>
+    <span class="nx">value</span><span class="o">:</span> <span class="s1">&#39;C&#39;</span> <span class="c1">// &#39;C&#39; is returned when this item is checked.</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<h2 id="methods">Methods</h2>
+
+<h3 id="methods_value"><code>value</code></h3>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">currentOrNewValue</span> <span class="o">=</span> <span class="nx">$trigger</span><span class="p">.</span><span class="nx">contextMenuCommon</span><span class="p">(</span><span class="s1">&#39;value&#39;</span><span class="p">,</span> <span class="nx">itemKeyOrRadioGroup</span><span class="p">[,</span> <span class="nx">newValue</span><span class="p">])</span>
+</code></pre></div>
+<p>Return a current value of the target. If <code>newValue</code> is passed, update a value of the target before return.<br>The target is a menu item or a group of <code>radio</code> menu items <code>itemKeyOrRadioGroup</code> indicates. <code>itemKeyOrRadioGroup</code> is a key of an <code>items</code> object, or a string as <a href="#radiogroup"><code>radiogroup</code></a>. It is discriminated automatically.<br>A returned value differs depending on <code>checked</code> state of the target menu item or menu items in the target group.<br>If <code>itemKeyOrRadioGroup</code> indicates a <code>radio</code> menu item, a current value of a group that includes that menu item is returned (i.e. it is considered as that <code>itemKeyOrRadioGroup</code> indicates the group). Therefore, note that a returned value might be not <code>value</code> of the target menu item. (Because a value of a group is a <code>value</code> of checked menu item in the group. And another item in that group might be checked.)<br>Also, <code>newValue</code> is a value in <code>value</code> array of the target <code>checkbox</code> menu item or <code>value</code> of any of <code>radio</code> menu items in the target group.</p>
+
+<p>For example:</p>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">$</span><span class="p">.</span><span class="nx">contextMenuCommon</span><span class="p">({</span>
+  <span class="nx">selector</span><span class="o">:</span> <span class="s1">&#39;#trigger&#39;</span><span class="p">,</span>
+  <span class="nx">items</span><span class="o">:</span> <span class="p">{</span>
+
+    <span class="nx">fontWeight</span><span class="o">:</span> <span class="p">{</span>
+      <span class="nx">label</span><span class="o">:</span> <span class="s1">&#39;Bold Font&#39;</span><span class="p">,</span>
+      <span class="nx">type</span><span class="o">:</span> <span class="s1">&#39;checkbox&#39;</span><span class="p">,</span>
+      <span class="nx">value</span><span class="o">:</span> <span class="p">[</span><span class="s1">&#39;normal&#39;</span><span class="p">,</span> <span class="s1">&#39;bold&#39;</span><span class="p">]</span>
+    <span class="p">},</span>
+
+    <span class="nx">fontSize</span><span class="o">:</span> <span class="p">{</span>
+      <span class="nx">label</span><span class="o">:</span> <span class="s1">&#39;Font Size&#39;</span><span class="p">,</span>
+      <span class="nx">items</span><span class="o">:</span> <span class="p">{</span>
+        <span class="nx">size1</span><span class="o">:</span> <span class="p">{</span>
+          <span class="nx">label</span><span class="o">:</span> <span class="s1">&#39;Small&#39;</span><span class="p">,</span>
+          <span class="nx">type</span><span class="o">:</span> <span class="s1">&#39;radio&#39;</span><span class="p">,</span>
+          <span class="nx">radiogroup</span><span class="o">:</span> <span class="s1">&#39;fontSize&#39;</span><span class="p">,</span>
+          <span class="nx">value</span><span class="o">:</span> <span class="s1">&#39;8pt&#39;</span>
+        <span class="p">},</span>
+        <span class="nx">size2</span><span class="o">:</span> <span class="p">{</span>
+          <span class="nx">label</span><span class="o">:</span> <span class="s1">&#39;Medium&#39;</span><span class="p">,</span>
+          <span class="nx">type</span><span class="o">:</span> <span class="s1">&#39;radio&#39;</span><span class="p">,</span>
+          <span class="nx">radiogroup</span><span class="o">:</span> <span class="s1">&#39;fontSize&#39;</span><span class="p">,</span>
+          <span class="nx">value</span><span class="o">:</span> <span class="s1">&#39;12pt&#39;</span>
+        <span class="p">},</span>
+        <span class="nx">size3</span><span class="o">:</span> <span class="p">{</span>
+          <span class="nx">label</span><span class="o">:</span> <span class="s1">&#39;Large&#39;</span><span class="p">,</span>
+          <span class="nx">type</span><span class="o">:</span> <span class="s1">&#39;radio&#39;</span><span class="p">,</span>
+          <span class="nx">radiogroup</span><span class="o">:</span> <span class="s1">&#39;fontSize&#39;</span><span class="p">,</span>
+          <span class="nx">value</span><span class="o">:</span> <span class="s1">&#39;16pt&#39;</span>
+        <span class="p">}</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+
+  <span class="p">}</span>
+<span class="p">});</span>
+
+<span class="kd">var</span> <span class="nx">$trigger</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#trigger&#39;</span><span class="p">);</span>
+
+<span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#button-get-values&#39;</span><span class="p">).</span><span class="nx">click</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;fontWeight: &#39;</span> <span class="o">+</span> <span class="nx">$trigger</span><span class="p">.</span><span class="nx">contextMenuCommon</span><span class="p">(</span><span class="s1">&#39;value&#39;</span><span class="p">,</span> <span class="s1">&#39;fontWeight&#39;</span><span class="p">));</span>
+  <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;fontSize: &#39;</span> <span class="o">+</span> <span class="nx">$trigger</span><span class="p">.</span><span class="nx">contextMenuCommon</span><span class="p">(</span><span class="s1">&#39;value&#39;</span><span class="p">,</span> <span class="s1">&#39;fontSize&#39;</span><span class="p">));</span>
+<span class="p">});</span>
+
+<span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#button-set-weight&#39;</span><span class="p">).</span><span class="nx">click</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+  <span class="nx">$trigger</span><span class="p">.</span><span class="nx">contextMenuCommon</span><span class="p">(</span><span class="s1">&#39;value&#39;</span><span class="p">,</span> <span class="s1">&#39;fontWeight&#39;</span><span class="p">,</span> <span class="s1">&#39;bold&#39;</span><span class="p">);</span>
+<span class="p">});</span>
+
+<span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#button-set-size&#39;</span><span class="p">).</span><span class="nx">click</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+  <span class="nx">$trigger</span><span class="p">.</span><span class="nx">contextMenuCommon</span><span class="p">(</span><span class="s1">&#39;value&#39;</span><span class="p">,</span> <span class="s1">&#39;fontSize&#39;</span><span class="p">,</span> <span class="s1">&#39;12pt&#39;</span><span class="p">);</span>
+<span class="p">});</span>
+</code></pre></div>
+<!-- include "sample_04.html" -->
+<!-- ================ sample -->
+<div class="cols2">
+  <div class="col" style="text-align: right; padding-top: 10px;">
+    <span class="trigger" id="sample-04-trigger">Right-click here</span><br>    <button id="sample-04-button-01">Get value</button><br>    <button id="sample-04-button-02">Set weight</button><br>    <button id="sample-04-button-03">Set size</button>
+  </div>
+  <div class="col">
+    <textarea readonly class="console" id="sample-04-console"></textarea>
+  </div>
+</div>
+
+<script>
+$(function() {
+  'use strict';
+
+  var console = getVConsole('#sample-04-console');
+
+  $.contextMenuCommon({
+    selector: '#sample-04-trigger',
+    items: {
+
+      fontWeight: {
+        label: 'Bold Font',
+        type: 'checkbox',
+        value: ['normal', 'bold']
+      },
+
+      fontSize: {
+        label: 'Font Size',
+        items: {
+          size1: {
+            label: 'Small',
+            type: 'radio',
+            radiogroup: 'fontSize',
+            value: '8pt'
+          },
+          size2: {
+            label: 'Medium',
+            type: 'radio',
+            radiogroup: 'fontSize',
+            value: '12pt'
+          },
+          size3: {
+            label: 'Large',
+            type: 'radio',
+            radiogroup: 'fontSize',
+            value: '16pt'
+          }
+        }
+      }
+
+    }
+  });
+
+  var $trigger = $('#sample-04-trigger');
+
+  $('#sample-04-button-01').click(function() {
+    console.log('fontWeight: ' + $trigger.contextMenuCommon('value', 'fontWeight'));
+    console.log('fontSize: ' + $trigger.contextMenuCommon('value', 'fontSize'));
+  });
+
+  $('#sample-04-button-02').click(function() {
+    $trigger.contextMenuCommon('value', 'fontWeight', 'bold');
+  });
+
+  $('#sample-04-button-03').click(function() {
+    $trigger.contextMenuCommon('value', 'fontSize', '12pt');
+  });
+
+});
+</script>
+<!-- ================ /sample -->
+<!-- /include "sample_04.html" -->
+
+<h3 id="click"><code>click</code></h3>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">$trigger</span> <span class="o">=</span> <span class="nx">$trigger</span><span class="p">.</span><span class="nx">contextMenuCommon</span><span class="p">(</span><span class="s1">&#39;click&#39;</span><span class="p">,</span> <span class="nx">itemKey</span><span class="p">)</span>
+</code></pre></div>
+<p>Emulate a click operation by user.<br>The state of checkbox or radio, <code>checked</code> and <code>value</code> property are updated.<br>This is mainly used to toggle the checkbox.</p>
+
+<p>For example, the following two codes work same:</p>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="nx">$</span><span class="p">.</span><span class="nx">contextMenuCommon</span><span class="p">({</span>
+  <span class="nx">selector</span><span class="o">:</span> <span class="s1">&#39;#trigger&#39;</span><span class="p">,</span>
+  <span class="nx">items</span><span class="o">:</span> <span class="p">{</span>
+
+    <span class="nx">fontWeight</span><span class="o">:</span> <span class="p">{</span>
+      <span class="nx">label</span><span class="o">:</span> <span class="s1">&#39;Bold Font&#39;</span><span class="p">,</span>
+      <span class="nx">type</span><span class="o">:</span> <span class="s1">&#39;checkbox&#39;</span><span class="p">,</span>
+      <span class="nx">value</span><span class="o">:</span> <span class="p">[</span><span class="s1">&#39;normal&#39;</span><span class="p">,</span> <span class="s1">&#39;bold&#39;</span><span class="p">]</span>
+    <span class="p">},</span>
+
+    <span class="nx">fontSize</span><span class="o">:</span> <span class="p">{</span>
+      <span class="nx">label</span><span class="o">:</span> <span class="s1">&#39;Font Size&#39;</span><span class="p">,</span>
+      <span class="nx">items</span><span class="o">:</span> <span class="p">{</span>
+        <span class="nx">size1</span><span class="o">:</span> <span class="p">{</span>
+          <span class="nx">label</span><span class="o">:</span> <span class="s1">&#39;Small&#39;</span><span class="p">,</span>
+          <span class="nx">type</span><span class="o">:</span> <span class="s1">&#39;radio&#39;</span><span class="p">,</span>
+          <span class="nx">radiogroup</span><span class="o">:</span> <span class="s1">&#39;fontSize&#39;</span><span class="p">,</span>
+          <span class="nx">value</span><span class="o">:</span> <span class="s1">&#39;8pt&#39;</span>
+        <span class="p">},</span>
+        <span class="nx">size2</span><span class="o">:</span> <span class="p">{</span>
+          <span class="nx">label</span><span class="o">:</span> <span class="s1">&#39;Medium&#39;</span><span class="p">,</span>
+          <span class="nx">type</span><span class="o">:</span> <span class="s1">&#39;radio&#39;</span><span class="p">,</span>
+          <span class="nx">radiogroup</span><span class="o">:</span> <span class="s1">&#39;fontSize&#39;</span><span class="p">,</span>
+          <span class="nx">value</span><span class="o">:</span> <span class="s1">&#39;12pt&#39;</span>
+        <span class="p">},</span>
+        <span class="nx">size3</span><span class="o">:</span> <span class="p">{</span>
+          <span class="nx">label</span><span class="o">:</span> <span class="s1">&#39;Large&#39;</span><span class="p">,</span>
+          <span class="nx">type</span><span class="o">:</span> <span class="s1">&#39;radio&#39;</span><span class="p">,</span>
+          <span class="nx">radiogroup</span><span class="o">:</span> <span class="s1">&#39;fontSize&#39;</span><span class="p">,</span>
+          <span class="nx">value</span><span class="o">:</span> <span class="s1">&#39;16pt&#39;</span>
+        <span class="p">}</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+
+  <span class="p">}</span>
+<span class="p">});</span>
+
+<span class="kd">var</span> <span class="nx">$trigger</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#trigger&#39;</span><span class="p">);</span>
+
+<span class="nx">$trigger</span><span class="p">.</span><span class="nx">contextMenuCommon</span><span class="p">(</span><span class="s1">&#39;click&#39;</span><span class="p">,</span> <span class="s1">&#39;fontWeight&#39;</span><span class="p">);</span>
+<span class="nx">$trigger</span><span class="p">.</span><span class="nx">contextMenuCommon</span><span class="p">(</span><span class="s1">&#39;click&#39;</span><span class="p">,</span> <span class="s1">&#39;size2&#39;</span><span class="p">);</span>
+</code></pre></div><div class="highlight"><pre><code class="language-js" data-lang="js"><span class="c1">// ... same to above</span>
+
+<span class="kd">var</span> <span class="nx">$trigger</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#trigger&#39;</span><span class="p">);</span>
+
+<span class="kd">var</span> <span class="nx">currentValue</span> <span class="o">=</span> <span class="nx">$trigger</span><span class="p">.</span><span class="nx">contextMenuCommon</span><span class="p">(</span><span class="s1">&#39;value&#39;</span><span class="p">,</span> <span class="s1">&#39;fontWeight&#39;</span><span class="p">);</span>
+<span class="nx">$trigger</span><span class="p">.</span><span class="nx">contextMenuCommon</span><span class="p">(</span><span class="s1">&#39;value&#39;</span><span class="p">,</span> <span class="s1">&#39;fontWeight&#39;</span><span class="p">,</span>
+  <span class="nx">currentValue</span> <span class="o">===</span> <span class="s1">&#39;normal&#39;</span> <span class="o">?</span> <span class="s1">&#39;bold&#39;</span> <span class="o">:</span> <span class="s1">&#39;normal&#39;</span><span class="p">);</span>
+<span class="nx">$trigger</span><span class="p">.</span><span class="nx">contextMenuCommon</span><span class="p">(</span><span class="s1">&#39;value&#39;</span><span class="p">,</span> <span class="s1">&#39;fontSize&#39;</span><span class="p">,</span> <span class="s1">&#39;12pt&#39;</span><span class="p">);</span>
+</code></pre></div>
+<h2 id="label"><code>label</code></h2>
+
+<p><em>Alias:</em> <code>name</code><br><em>Type:</em> string, jQuery, DOM or Array</p>
+
+<p>A string that is specified to <code>label</code> property of a menu item is shown to user on the menu item.<br>If an array is specified, the second string is shown as sub-label that is positioned to the right of the label. It is usually used to indicate a shortcut-keys of the command.<br>For example:</p>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="c1">// In constructor options</span>
+<span class="nx">items</span><span class="o">:</span> <span class="p">{</span>
+  <span class="nx">a</span><span class="o">:</span> <span class="p">{</span>
+    <span class="nx">label</span><span class="o">:</span> <span class="s1">&#39;Create New&#39;</span><span class="p">,</span> <span class="c1">// no sub-label</span>
+    <span class="nx">icon</span><span class="o">:</span> <span class="s1">&#39;add&#39;</span>
+  <span class="p">},</span>
+  <span class="nx">b</span><span class="o">:</span> <span class="p">{</span>
+    <span class="nx">label</span><span class="o">:</span> <span class="p">[</span><span class="s1">&#39;Open File...&#39;</span><span class="p">,</span> <span class="s1">&#39;Ctrl+O&#39;</span><span class="p">],</span>
+    <span class="nx">icon</span><span class="o">:</span> <span class="s1">&#39;fa fa-folder-open-o&#39;</span> <span class="c1">// Icon by Font Awesome</span>
+  <span class="p">},</span>
+  <span class="nx">c</span><span class="o">:</span> <span class="p">{</span>
+    <span class="nx">label</span><span class="o">:</span> <span class="p">[</span><span class="s1">&#39;Save&#39;</span><span class="p">,</span> <span class="s1">&#39;Ctrl+S&#39;</span><span class="p">],</span>
+    <span class="nx">icon</span><span class="o">:</span> <span class="s1">&#39;fa fa-floppy-o&#39;</span> <span class="c1">// Icon by Font Awesome</span>
+  <span class="p">},</span>
+  <span class="nx">d</span><span class="o">:</span> <span class="p">{</span>
+    <span class="nx">label</span><span class="o">:</span> <span class="p">[</span><span class="s1">&#39;Save As...&#39;</span><span class="p">,</span> <span class="s1">&#39;Ctrl+Shift+S&#39;</span><span class="p">]</span>
+  <span class="p">},</span>
+  <span class="nx">e</span><span class="o">:</span> <span class="p">{</span>
+    <span class="nx">label</span><span class="o">:</span> <span class="p">[</span><span class="s1">&#39;Quit&#39;</span><span class="p">,</span> <span class="s1">&#39;\u2318Q&#39;</span><span class="p">],</span> <span class="c1">// symbol for OS X</span>
+    <span class="nx">icon</span><span class="o">:</span> <span class="s1">&#39;quit&#39;</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<!-- include "sample_05.html" -->
+<!-- ================ sample -->
+<p><span class="trigger" id="sample-05-trigger">Right-Click Here</span></p>
+
+<script>
+$(function() {
+  'use strict';
+
+  $.contextMenuCommon({
+    selector: '#sample-05-trigger',
+    items: {
+      a: {
+        label: 'Create New', // no sub-label
+        icon: 'add'
+      },
+      b: {
+        label: ['Open File...', 'Ctrl+O'],
+        icon: 'fa fa-folder-open-o' // Icon by Font Awesome
+      },
+      c: {
+        label: ['Save', 'Ctrl+S'],
+        icon: 'fa fa-floppy-o' // Icon by Font Awesome
+      },
+      d: {
+        label: ['Save As...', 'Ctrl+Shift+S']
+      },
+      e: {
+        label: ['Quit', '\u2318Q'], // symbol for OS X
+        icon: 'quit'
+      }
+    }
+  });
+
+});
+</script>
+<!-- ================ /sample -->
+<!-- /include "sample_05.html" -->
+
+<p>Note that the shortcut-keys are not a access-keys, and jQuery.contextMenuCommon only shows it. And your app has to handle those key events, and so on if your app supports shortcut-keys, because shortcut-keys have to work without depending on the menu.</p>
+
+<p>Also, you can specify a jQuery object or a DOM element instead of a string to a label and sub-label. It is used to decorate the label or sub-label, change those dynamically, or customize those more, or you can do anything you want. Note that you can also break a layout of the menu easily.<br>For example:</p>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="c1">// In constructor options</span>
+<span class="nx">items</span><span class="o">:</span> <span class="p">{</span>
+  <span class="nx">a</span><span class="o">:</span> <span class="p">{</span>
+    <span class="nx">label</span><span class="o">:</span> <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;&lt;span&gt;Open &lt;strong&gt;My&lt;/strong&gt; File...&lt;/span&gt;&#39;</span><span class="p">)</span>
+  <span class="p">},</span>
+  <span class="nx">b</span><span class="o">:</span> <span class="p">{</span>
+    <span class="nx">label</span><span class="o">:</span> <span class="p">[</span><span class="s1">&#39;Save&#39;</span><span class="p">,</span> <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;&lt;span&gt;Ctrl+&lt;span style=&quot;color: blue;&quot;&gt;S&lt;/span&gt;&lt;/span&gt;&#39;</span><span class="p">)]</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<!-- include "sample_06.html" -->
+<!-- ================ sample -->
+<p><span class="trigger" id="sample-06-trigger">Right-Click Here</span></p>
+
+<script>
+$(function() {
+  'use strict';
+
+  $.contextMenuCommon({
+    selector: '#sample-06-trigger',
+    items: {
+      a: {
+        label: $('<span>Open <strong>My</strong> File...</span>')
+      },
+      b: {
+        label: ['Save', $('<span>Ctrl+<span style="color: blue;">S</span></span>')]
+      }
+    }
+  });
+
+});
+</script>
+<!-- ================ /sample -->
+<!-- /include "sample_06.html" -->
+
+<p>For example, change dynamically, and add animation:</p>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">label</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;&lt;span&gt;Download Data File&lt;/span&gt;&#39;</span><span class="p">),</span>
+  <span class="nx">item</span><span class="p">,</span> <span class="nx">rate</span><span class="p">,</span> <span class="nx">span</span><span class="p">,</span> <span class="nx">isLoading</span><span class="p">;</span>
+
+<span class="kd">function</span> <span class="nx">progress</span><span class="p">()</span> <span class="p">{</span>
+  <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">item</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">item</span> <span class="o">=</span> <span class="nx">label</span><span class="p">.</span><span class="nx">parent</span><span class="p">().</span><span class="nx">css</span><span class="p">({</span>
+      <span class="nx">backgroundImage</span><span class="o">:</span> <span class="s1">&#39;url(\&#39;data:image/svg+xml;utf8,&#39;</span> <span class="o">+</span>
+        <span class="s1">&#39;%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220&#39;</span> <span class="o">+</span>
+        <span class="s1">&#39;%200%2025%2025%22%20width%3D%2225%22%20height%3D%2225%22%3E%3Crect%20x%3D%22&#39;</span> <span class="o">+</span>
+        <span class="s1">&#39;0%22%20y%3D%220%22%20width%3D%22100%25%22%20height%3D%22100%25%22%20fill%3D&#39;</span> <span class="o">+</span>
+        <span class="s1">&#39;%22rgba%28168%2C241%2C163%2C0.8%29%22%2F%3E%3C%2Fsvg%3E\&#39;)&#39;</span><span class="p">,</span>
+      <span class="c1">// Chrome does not support adjusting background-size.</span>
+      <span class="c1">// backgroundSize: &#39;0 100%&#39;,</span>
+      <span class="nx">backgroundSize</span><span class="o">:</span> <span class="s1">&#39;0&#39;</span><span class="p">,</span>
+      <span class="nx">backgroundRepeat</span><span class="o">:</span> <span class="s1">&#39;repeat-y&#39;</span>
+    <span class="p">});</span>
+    <span class="nx">rate</span> <span class="o">=</span> <span class="nx">span</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+  <span class="p">}</span>
+  <span class="k">if</span> <span class="p">((</span><span class="nx">rate</span> <span class="o">+=</span> <span class="nx">span</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">100</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nx">span</span> <span class="o">=</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">floor</span><span class="p">(</span><span class="nb">Math</span><span class="p">.</span><span class="nx">random</span><span class="p">()</span> <span class="o">*</span> <span class="mi">26</span><span class="p">)</span> <span class="o">+</span> <span class="mi">5</span><span class="p">;</span> <span class="c1">// [5, 30]</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nx">span</span> <span class="o">&gt;</span> <span class="mi">100</span> <span class="o">-</span> <span class="nx">rate</span><span class="p">)</span> <span class="p">{</span> <span class="nx">span</span> <span class="o">=</span> <span class="mi">100</span> <span class="o">-</span> <span class="nx">rate</span><span class="p">;</span> <span class="p">}</span>
+    <span class="nx">item</span><span class="p">.</span><span class="nx">animate</span><span class="p">({</span><span class="nx">backgroundSize</span><span class="o">:</span> <span class="nx">rate</span> <span class="o">+</span> <span class="nx">span</span> <span class="o">+</span> <span class="s1">&#39;%&#39;</span><span class="p">},</span>
+      <span class="nb">Math</span><span class="p">.</span><span class="nx">floor</span><span class="p">(</span><span class="nb">Math</span><span class="p">.</span><span class="nx">random</span><span class="p">()</span> <span class="o">*</span> <span class="mi">2501</span><span class="p">)</span> <span class="o">+</span> <span class="mi">500</span><span class="p">,</span> <span class="c1">// [500, 3000]</span>
+      <span class="nx">progress</span><span class="p">);</span>
+  <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+    <span class="nx">isLoading</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
+    <span class="nx">rate</span> <span class="o">=</span> <span class="nx">span</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="nx">label</span><span class="p">.</span><span class="nx">text</span><span class="p">(</span><span class="s1">&#39;Download Next File&#39;</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="nx">$</span><span class="p">.</span><span class="nx">contextMenuCommon</span><span class="p">({</span>
+  <span class="nx">selector</span><span class="o">:</span> <span class="s1">&#39;#trigger&#39;</span><span class="p">,</span>
+  <span class="nx">items</span><span class="o">:</span> <span class="p">{</span>
+    <span class="nx">download</span><span class="o">:</span> <span class="p">{</span>
+      <span class="nx">label</span><span class="o">:</span> <span class="nx">label</span><span class="p">,</span>
+      <span class="nx">icon</span><span class="o">:</span> <span class="s1">&#39;fa fa-download&#39;</span><span class="p">,</span>
+      <span class="nx">callback</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="nx">isLoading</span><span class="p">)</span> <span class="p">{</span>
+          <span class="nx">isLoading</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
+          <span class="nx">label</span><span class="p">.</span><span class="nx">text</span><span class="p">(</span><span class="s1">&#39;Restart Download&#39;</span><span class="p">);</span>
+          <span class="nx">item</span><span class="p">.</span><span class="nx">stop</span><span class="p">();</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+          <span class="nx">isLoading</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+          <span class="nx">label</span><span class="p">.</span><span class="nx">text</span><span class="p">(</span><span class="s1">&#39;Stop Download&#39;</span><span class="p">);</span>
+          <span class="k">if</span> <span class="p">(</span><span class="nx">rate</span> <span class="o">===</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="nx">span</span> <span class="o">===</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span> <span class="nx">item</span><span class="p">.</span><span class="nx">css</span><span class="p">(</span><span class="s1">&#39;backgroundSize&#39;</span><span class="p">,</span> <span class="s1">&#39;0&#39;</span><span class="p">);</span> <span class="p">}</span> <span class="c1">// next</span>
+          <span class="nx">progress</span><span class="p">();</span>
+        <span class="p">}</span>
+        <span class="k">return</span> <span class="kc">false</span><span class="p">;</span>
+      <span class="p">}</span>
+    <span class="p">}</span>
+  <span class="p">}</span>
+<span class="p">});</span>
+</code></pre></div>
+<!-- include "sample_07.html" -->
+<!-- ================ sample -->
+<p><span class="trigger" id="sample-07-trigger">Right-Click Here</span></p>
+
+<script>
+$(function() {
+  'use strict';
+
+  var label = $('<span>Download Data File</span>'),
+    item, rate, span, isLoading;
+
+  function progress() {
+    if (!item) {
+      item = label.parent().css({
+        backgroundImage: 'url(\'data:image/svg+xml;utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2025%2025%22%20width%3D%2225%22%20height%3D%2225%22%3E%3Crect%20x%3D%220%22%20y%3D%220%22%20width%3D%22100%25%22%20height%3D%22100%25%22%20fill%3D%22rgba%28168%2C241%2C163%2C0.8%29%22%2F%3E%3C%2Fsvg%3E\')',
+        // Chrome does not support adjusting background-size.
+        // backgroundSize: '0 100%',
+        backgroundSize: '0',
+        backgroundRepeat: 'repeat-y'
+      });
+      rate = span = 0;
+    }
+    if ((rate += span) < 100) {
+      span = Math.floor(Math.random() * 26) + 5; // [5, 30]
+      if (span > 100 - rate) { span = 100 - rate; }
+      item.animate({backgroundSize: rate + span + '%'},
+        Math.floor(Math.random() * 2501) + 500, // [500, 3000]
+        progress);
+    } else {
+      isLoading = false;
+      rate = span = 0;
+      label.text('Download Next File');
+    }
+  }
+
+  $.contextMenuCommon({
+    selector: '#sample-07-trigger',
+    items: {
+      download: {
+        label: label,
+        icon: 'fa fa-download',
+        callback: function() {
+          if (isLoading) {
+            isLoading = false;
+            label.text('Restart Download');
+            item.stop();
+          } else {
+            isLoading = true;
+            label.text('Stop Download');
+            if (rate === 0 && span === 0) { item.css('backgroundSize', '0'); } // next
+            progress();
+          }
+          return false;
+        }
+      }
+    }
+  });
+});
+</script>
+<!-- ================ /sample -->
+<!-- /include "sample_07.html" -->
+
+<h2 id="icon"><code>icon</code></h2>
+
+<p><code>icon</code> property accepts class names of basic icons, and class names of <a href="https://fortawesome.github.io/Font-Awesome/">Font Awesome</a> icons such as <code>fa fa-folder-open-o</code> also.<br>For example:</p>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="c1">// In constructor options</span>
+<span class="nx">items</span><span class="o">:</span> <span class="p">{</span>
+  <span class="nx">a</span><span class="o">:</span> <span class="p">{</span>
+    <span class="nx">label</span><span class="o">:</span> <span class="s1">&#39;Basic Icon&#39;</span><span class="p">,</span>
+    <span class="nx">icon</span><span class="o">:</span> <span class="s1">&#39;edit&#39;</span>
+  <span class="p">},</span>
+  <span class="nx">b</span><span class="o">:</span> <span class="p">{</span>
+    <span class="nx">label</span><span class="o">:</span> <span class="s1">&#39;Font Awesome Icon&#39;</span><span class="p">,</span>
+    <span class="nx">icon</span><span class="o">:</span> <span class="s1">&#39;fa fa-github-alt&#39;</span>
+    <span class="c1">// http://fortawesome.github.io/Font-Awesome/icon/github-alt/</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<!-- include "sample_08.html" -->
+<!-- ================ sample -->
+<p><span class="trigger" id="sample-08-trigger">Right-Click Here</span></p>
+
+<script>
+$(function() {
+  'use strict';
+
+  $.contextMenuCommon({
+    selector: '#sample-08-trigger',
+    items: {
+      a: {
+        label: 'Basic Icon',
+        icon: 'edit'
+      },
+      b: {
+        label: 'Font Awesome Icon',
+        icon: 'fa fa-github-alt'
+        // http://fortawesome.github.io/Font-Awesome/icon/github-alt/
+      }
+    }
+  });
+
+});
+</script>
+<!-- ================ /sample -->
+<!-- /include "sample_08.html" -->
+
+  </main>
+  <footer>
+    <p class="copyright">jQuery.contextMenuCommon maintained by <a href="https://github.com/anseki">anseki</a></p>
+  </footer>
+
+</body>
+</html>
