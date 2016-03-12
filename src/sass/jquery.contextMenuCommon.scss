@@ -44,11 +44,11 @@
   float: right;
   padding-left: 1em;
 
-  .context-menu-hover & {
+  .context-menu-hover > & {
     color: darken($context-menu-text-color-hover, 10);
   }
 
-  .context-menu-disabled & {
+  .context-menu-disabled > & {
     color: lighten($context-menu-text-color-disabled, 10);
   }
 }
