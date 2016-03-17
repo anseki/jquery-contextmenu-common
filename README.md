@@ -241,7 +241,7 @@ The `radio` menu item accepts following properties:
 *Default:* `undefined`
 
 A string to group the menu items and identify the group.  
-Items `radiogroup` is not specified in a same menu node (i.e. one `items` object) are grouped into one group.  
+In one list (i.e. one `items` object's children), items that `radiogroup` is not specified are grouped into one group.  
 For example, there are five groups:
 
 ```js
