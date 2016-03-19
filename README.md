@@ -22,13 +22,13 @@ This jQuery.contextMenuCommon plugin wraps jQuery.contextMenu, and adds `checkbo
 Load jQuery.contextMenuCommon (2 files `css` and `js`) after jQuery.contextMenu.
 
 ```html
-<link href="jquery.contextMenu.min.css" rel="stylesheet"/>
-<link href="jquery.contextMenuCommon.min.css" rel="stylesheet"/>
+<link href="dist/fixed/jquery.contextMenu.min.css" rel="stylesheet">
+<link href="dist/jquery.contextMenuCommon.min.css" rel="stylesheet">
 
-<script src="jquery.min.js"></script>
-<script src="jquery.ui.position.min.js"></script>
-<script src="jquery.contextMenu.mi.js"></script>
-<script src="jquery.contextMenuCommon.min.js"></script>
+<script src="dist/jquery.min.js"></script>
+<script src="dist/jquery-ui-position.min.js"></script>
+<script src="dist/fixed/jquery.contextMenu.min.js"></script>
+<script src="dist/jquery.contextMenuCommon.min.js"></script>
 ```
 
 Since jQuery.contextMenuCommon wraps jQuery.contextMenu, it works as jQuery.contextMenu completely, except additional features. See [jQuery.contextMenu Documentation](https://swisnl.github.io/jQuery-contextMenu/docs.html) for basic usage.
