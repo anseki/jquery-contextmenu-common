@@ -10,5 +10,6 @@ $context-menu-text-color-disabled: lighten($context-menu-text-color, 55) !defaul
 // Icons
 $context-menu-icon-font-path: "font/" !default;
 $context-menu-icon-font-name: "context-menu-common-icons" !default;
-$context-menu-icon-color: #868594;
+//$context-menu-icon-color: #868594;
+$context-menu-icon-color: lighten($context-menu-text-color, 40);
 $context-menu-icon-ctrl-color: $context-menu-text-color;

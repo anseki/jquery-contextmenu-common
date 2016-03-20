@@ -25,6 +25,7 @@
 .contextmenu-common-icon-ctrl::before {
   font-family: $context-menu-icon-font-name;
   color: $context-menu-icon-ctrl-color;
+  text-shadow: 1px 1px 2px lighten($context-menu-icon-ctrl-color, 50);
 }
 
 .context-menu-icon-fa::before {
