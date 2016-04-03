@@ -15,7 +15,7 @@
   "dependencies": {
     "jquery-contextmenu": "^2.1.1"
   },
-  "homepage": "https://github.com/anseki/jquery-contextmenu-common",
+  "homepage": "http://anseki.github.io/jquery-contextmenu-common",
   "repository": {
     "type": "git",
     "url": "git://github.com/anseki/jquery-contextmenu-common.git"
