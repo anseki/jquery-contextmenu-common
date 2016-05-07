@@ -2,7 +2,7 @@
 
 jQuery plugin to add common checkable menu items `checkbox` and `radio` and more features to jQuery.contextMenu.
 
-![screen](s01.png)
+[![s01](s01.png)](http://anseki.github.io/jquery-contextmenu-common/)
 
 **See <a href="http://anseki.github.io/jquery-contextmenu-common/">DEMO</a>**
 
