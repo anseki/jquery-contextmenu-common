@@ -2,9 +2,9 @@
 
 jQuery plugin to add common checkable menu items `checkbox` and `radio` and more features to jQuery.contextMenu.
 
-[![s01](s01.png)](http://anseki.github.io/jquery-contextmenu-common/)
+[![s01](s01.png)](https://anseki.github.io/jquery-contextmenu-common/)
 
-**See <a href="http://anseki.github.io/jquery-contextmenu-common/">DEMO</a>**
+**See <a href="https://anseki.github.io/jquery-contextmenu-common/">DEMO</a>**
 
 A very useful jQuery plugin [jQuery.contextMenu](https://swisnl.github.io/jQuery-contextMenu/) supports `text`, `textarea`, `checkbox`, `radio`, etc., as `item.type`. Those allow you to embed form elements in the menu.  
 Those may be useful in special cases, aside from whether users welcome a form that appears via right-click or not.  
