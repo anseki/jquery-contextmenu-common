@@ -1,5 +1,7 @@
 # jQuery.contextMenuCommon
 
+[![npm](https://img.shields.io/npm/v/jquery-contextmenu-common.svg)](https://www.npmjs.com/package/jquery-contextmenu-common) [![GitHub issues](https://img.shields.io/github/issues/anseki/jquery-contextmenu-common.svg)](https://github.com/anseki/jquery-contextmenu-common/issues) [![David](https://img.shields.io/david/anseki/jquery-contextmenu-common.svg)](package.json) [![license](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE-MIT)
+
 jQuery plugin to add common checkable menu items `checkbox` and `radio` and more features to jQuery.contextMenu.
 
 [![s01](s01.png)](https://anseki.github.io/jquery-contextmenu-common/)

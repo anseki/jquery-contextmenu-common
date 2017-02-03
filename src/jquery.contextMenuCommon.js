@@ -1,6 +1,6 @@
 /*
  * jQuery.contextMenuCommon
- * https://github.com/anseki/jquery-contextmenu-common
+ * https://anseki.github.io/jquery-contextmenu-common/
  *
  * Copyright (c) 2016 anseki
  * Licensed under the MIT license.
