@@ -114,8 +114,8 @@
 
       } else { // radio
         // Don't make `groupId` and `value` if those are not specified to check after.
-        if (((radiogroup = options.radiogroup) != null || // eslint-disable-line eqeqeq
-              (radiogroup = options.radio) != null) && // eslint-disable-line eqeqeq
+        if (((radiogroup = options.radiogroup) != null ||
+              (radiogroup = options.radio) != null) &&
             (groupId = radiogroup + '')) {
           item.groupId = groupId;
           specificGroupIds[groupId] = true;
@@ -225,7 +225,7 @@
       return array[0] === value ? false : array[1] === value ? true : null;
     }
 
-    var itemId, groupId, item;
+    var itemId, groupId, item, undef;
     if (itemKeyOrRadioGroup) {
       if (this.specificGroupIds[itemKeyOrRadioGroup]) { // give priority
         groupId = itemKeyOrRadioGroup;
@@ -242,7 +242,7 @@
           arguments.length >= 2 ? getCheckedByArrayElement(item.value, newValue) : null);
       }
     }
-    return void 0;
+    return undef;
   };
 
   CheckableMan.prototype.remove = function() {
@@ -267,7 +267,7 @@
    */
   function parseItems(items, checkableItems, nodeId) {
     var curNodeId; // nodeId that is not changed by nested nodes.
-    if (nodeId == null) { // eslint-disable-line eqeqeq
+    if (nodeId == null) {
       nodeId = {value: 0};
     } else {
       nodeId.value++;
@@ -318,7 +318,6 @@
         label = label[0];
       }
       if (label) {
-        // eslint-disable-next-line eqeqeq
         if ((isElmLabel = label instanceof jQuery || label.nodeType != null) || // loose check
             subLabel) {
           item.name = isElmLabel ? '' : label;
@@ -332,7 +331,6 @@
               if (subLabel && !$elm.has('.' + CLASS_PREFIX + 'sublabel').length) {
                 $elm.prepend(
                   $('<span class="' + CLASS_PREFIX + 'sublabel"/>')[
-                    // eslint-disable-next-line eqeqeq
                     subLabel instanceof jQuery || subLabel.nodeType != null ? // loose check
                     'append' : 'text'](subLabel)
                 );
