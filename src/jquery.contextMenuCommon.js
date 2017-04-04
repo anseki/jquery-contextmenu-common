@@ -96,8 +96,9 @@
    * @class
    * @param {Object} items - This has uncompleted `item`s.
    * @param {jQuery} $trigger - Trigger of the menu.
+   * @param {Object} rootOptions - Current root options.
    */
-  function CheckableMan(items, $trigger) {
+  function CheckableMan(items, $trigger, rootOptions) {
     var that = this, itemKey2itemId = {}, specificGroupIds = {},
       radioItems = [], nodeId2groupId = {}, groups = {};
 
@@ -161,7 +162,8 @@
       // Wrap callback
       options.callback = function() {
         that.click(itemId);
-        return orgCallback ? orgCallback.apply(that.$trigger, arguments) : void 0;
+        return orgCallback ? orgCallback.apply(that.$trigger, arguments) :
+          rootOptions.callback ? rootOptions.callback.apply(that.$trigger, arguments) : void 0;
       };
 
       // Icon
@@ -363,7 +365,7 @@
     var checkableItems;
     return options.items &&
         Object.keys((checkableItems = parseItems(options.items))).length ?
-      new CheckableMan(checkableItems, $trigger) : null;
+      new CheckableMan(checkableItems, $trigger, options) : null;
   }
 
   if (!$.contextMenu) {
