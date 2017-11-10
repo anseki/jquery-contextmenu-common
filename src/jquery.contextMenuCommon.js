@@ -50,7 +50,7 @@
    * @param {group} group - Target `group`.
    * @param {items} items - `items` to reference.
    * @param {string} [itemId] - `itemId` of new checked item in this group.
-   * @returns {any} value - `value` of new or current checked item.
+   * @returns {any} `value` of new or current checked item.
    */
   function radioValue(group, items, itemId) {
     var targetItemId = itemId || group.checkedItem, value,
@@ -78,7 +78,7 @@
   /**
    * @param {item} item - Target `item`.
    * @param {boolean} [checked] - new `checked` state.
-   * @returns {any} value - value of new or current state as index of `value` array.
+   * @returns {any} value of new or current state as index of `value` array.
    */
   function checkboxValue(item, checked) {
     var CLASS_PREFIX_TYPE = CLASS_PREFIX_ICON + 'checkbox-', options = item.options;
@@ -203,7 +203,7 @@
      * @param {group} group - Target `group`.
      * @param {items} items - `items` to reference.
      * @param {any} value - `value` for finding.
-     * @returns {?string} itemId - `itemId` of found item in this group.
+     * @returns {?string} `itemId` of found item in this group.
      */
     function getItemIdByGroupValue(group, items, value) {
       var targetItemId;
@@ -221,7 +221,7 @@
     /**
      * @param {Array} array - Target array.
      * @param {any} value - `value` for finding.
-     * @returns {?boolean} checked - `checked` by found index of array.
+     * @returns {?boolean} `checked` by found index of array.
      */
     function getCheckedByArrayElement(array, value) {
       return array[0] === value ? false : array[1] === value ? true : null;
@@ -265,7 +265,7 @@
    * @param {Object} items - `items` constructor options include.
    * @param {?Object} checkableItems - Reference to an object as target items for recursive calling.
    * @param {{value: number}} nodeId - Current node ID that is wrapped for referencing.
-   * @returns {Object} checkableItems - Found out target items. This has uncompleted `item`s.
+   * @returns {Object} Found out target items. This has uncompleted `item`s.
    */
   function parseItems(items, checkableItems, nodeId) {
     var curNodeId; // nodeId that is not changed by nested nodes.
@@ -359,7 +359,7 @@
   /**
    * @param {Object} options - Options for `$.contextMenuCommon`.
    * @param {jQuery} $trigger - Trigger of the menu.
-   * @returns {?CheckableMan} checkableMan - A `CheckableMan` instance if target items were found.
+   * @returns {?CheckableMan} A `CheckableMan` instance if target items were found.
    */
   function parseOptions(options, $trigger) {
     var checkableItems;
