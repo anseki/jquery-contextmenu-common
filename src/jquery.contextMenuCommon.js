@@ -2,7 +2,7 @@
  * jQuery.contextMenuCommon
  * https://anseki.github.io/jquery-contextmenu-common/
  *
- * Copyright (c) 2017 anseki
+ * Copyright (c) 2018 anseki
  * Licensed under the MIT license.
  */
 
