@@ -12,6 +12,11 @@
     "radio"
   ],
   "main": "src/jquery.contextMenuCommon.js",
+  "files": [
+    "dist",
+    "bower.json",
+    "LICENSE-MIT"
+  ],
   "dependencies": {
     "jquery-contextmenu": "^2.1.1"
   },
