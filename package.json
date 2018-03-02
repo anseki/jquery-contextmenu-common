@@ -14,8 +14,7 @@
   "main": "src/jquery.contextMenuCommon.js",
   "files": [
     "dist",
-    "bower.json",
-    "LICENSE-MIT"
+    "bower.json"
   ],
   "dependencies": {
     "jquery-contextmenu": "^2.1.1"
